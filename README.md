@@ -1,0 +1,3 @@
+# CECS 343 Software Engineering Project
+Rental property management tool that allows a land lond to keep track of his
+appartment, tenants, income and expenses ... 
