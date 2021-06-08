@@ -45,16 +45,3 @@ class Tenant:
 
     def print_tenant_apartment_pair(self):
         print(str(self.get_first_name()) + ' ' + str(self.get_last_name()) + '    ' + str(self.__apartment.get_number()))
-
-
-test = Tenant()
-test.set_first_name('Johnny')
-test.set_last_name('Dieb')
-test.set_phone('###-###-####')
-test.set_email('******@gmail.com')
-test.set_SSN('XXX-XX-XXXX')
-
-print(test.get_first_name() + ' ' + test.get_last_name())
-print(test.get_phone())
-print(test.get_email() + '\n' + test.get_SSN())
-print(test.get_apartment())
