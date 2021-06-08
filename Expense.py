@@ -1,32 +1,49 @@
-import datetime
+#TODO: update __init__ to use setters to initilize objects, 
+# update setters to validate users' input
+
+
+from datetime import datetime
 
 class Expense:
     def __init__(self):
-        self.__amount = 0.0
-        self.__payee = ''
-        self.__payment_date = datetime.datetime.now() #set to current time by default
-        self.__category = ''
+        self.set_amount()
+        self.set_payee()
+        self.set_payment_date()
+        self.set_category()
 
-    def set_amount(self, amount):
-        self.__amount = amount
+    def set_amount(self):
+        try:
+            self.__amount = float(input('Enter the amount paid: $'))
+        except ValueError:
+            print('amount can only be numbers (e.g: 12.56)... try again\n')
+            self.set_amount()
 
     def get_amount(self):
         return self.__amount
 
-    def set_payee(self, payee):
-        self.__payee = payee
+    def set_payee(self):
+        self.__payee = input('Ente the payee name: ')
 
     def get_payee(self):
         return self.__payee
 
-    def set_payment_date(self, date):
-        self.__payment_date = date
+    def set_payment_date(self):
+        user_date = input('Enter payment date(mm/dd/yyyy): ')
+        try:
+            self.__payment_date = datetime.strptime(user_date, '%m/%d/%Y')
+        except ValueError:
+            print('Incorrect format... try again\n')
+            self.set_payment_date()
     
     def get_payment_date(self):
-        return self.__payment_date
+        return self.__payment_date.date()
 
-    def set_category(self, category):
-        self.__category = category
+    def set_category(self):
+        self.__category = input('Enter payment category: ')
 
     def get_category(self):
         return self.__category
+
+    def print_expense(self):
+        return('Amount: ${}\nPayee: {}\nPayment date: {}\nCategory: {}'.format(
+            self.__amount, self.__payee, self.get_payment_date(), self.__category))
