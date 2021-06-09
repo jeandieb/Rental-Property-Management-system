@@ -1,6 +1,3 @@
-#TODO: update __init__ to use setters to initilize objects, 
-# update setters to validate users' input
-
 
 from datetime import datetime
 
