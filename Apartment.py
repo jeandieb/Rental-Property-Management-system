@@ -1,3 +1,5 @@
+from ApartmentRentPayments import ApartmentRentPayments
+
 class Apartment:
     def __init__(self):
         self.set_number()
@@ -7,7 +9,7 @@ class Apartment:
         self.set_num_baths()
         self.set_rent()
         self.set__rental_status()
-
+        self.__apartment_rent_payments = ApartmentRentPayments(self.get_number())
 
 
     def set_number(self):
@@ -85,11 +87,11 @@ class Apartment:
     def get_tenant(self):
         return self.__tenant
 
-    def set_payments_received(self, payments):
-        self.__payments_received = payments #ApartmentRentPayments()
+    def set_payment_received(self):
+        self.__apartment_rent_payments.set_payment_amount()
 
     def get_payments_received(self):
-        return self.__payments_received
+        return self.__apartment_rent_payments.get_payments_list()
 
 
     def print_appartment(self):
