@@ -44,6 +44,7 @@ class Tenant:
 
     def set_apartment(self, apartment):
         self.__apartment = apartment
+        apartment.set_tenant(self)
 
     def get_apartment(self):
         return self.__apartment
