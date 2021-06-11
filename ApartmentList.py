@@ -1,10 +1,9 @@
-#TODO define update apartment
 
 from Apartment import Apartment
 
 class ApartmentList:
     def __init__(self):
-        self. __apartment_list = [] #list that will hold the apartments...
+        self.__apartment_list = [] #list that will hold the apartments...
 
     
     def add_apartment(self):
