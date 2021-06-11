@@ -24,8 +24,62 @@ class ApartmentList:
 
         self.__apartment_list.pop(user_choice-1)
 
-        def update_apartment(self): #dummy
-            None
+       
+    def update_apartment(self):
+        user_choice = -1
+        self.print_apartment_list()
+        while(user_choice == -1):
+            data = input("which apartment would you like to edit? ")
+            if(data.isdigit):
+                data = int(data)
+                if(data > 0 and data <= len(self.__apartment_list)):
+                    user_choice = data
+            if (user_choice == -1):
+                print('Enter a number between 1 and {}... please try again\n'.format(len(self.__apartment_list)))
+        
+        apartment = self.__apartment_list[user_choice-1]
+        user_choice = self.get_what_to_update()
+        if(user_choice == 1): 
+            apartment.set_number()
+        elif(user_choice == 2):
+            apartment.set_address()
+        elif(user_choice == 3):
+            apartment.set_size()
+        elif(user_choice == 4):
+            apartment.set_num_beds()
+        elif(user_choice == 5):
+            apartment.set_num_baths()
+        elif(user_choice == 6):
+            apartment.set_rent()
+        elif(user_choice == 7):
+            apartment.set__rental_status()
+        elif(user_choice == 8):
+            apartment.set_tenant()
+        elif(user_choice == 9):
+            apartment.set_payment_received()
+        print('done')
+            
+
+    def get_what_to_update(self):
+        choice = -1
+        while(choice == -1):
+            data = input('1) Update number\n' + 
+                    '2) Update address\n'+
+                    '3) Update size\n' +
+                    '4) Update number of beds\n' +
+                    '5) Update number of baths\n' +
+                    '6) Update rent amount\n' +
+                    '7) Update rental status\n' +
+                    '8) Update tenant\n' +
+                    '9) Update payments record\n')
+            if(data.isdigit):
+                data = int(data)
+                if(data > 0 and data <= 9):
+                    choice = data
+            if (choice == -1):
+                print('Enter a number between 1 and 9... please try again\n')
+
+        return choice
 
     def print_apartment_list(self):
         index = 0
