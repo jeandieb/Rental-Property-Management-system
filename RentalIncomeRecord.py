@@ -53,7 +53,6 @@ class RentalIncomeRecord:
             print(str(apartment.get_number()) + ': ' + str(apartment.get_payments_received()))
 
     def find_total_rent(self):
-        for apartment in self.__apartment_list:
+        for apartment in self.__apartment_list.get_apartment_list():
             self.__total_rent_received = self.__total_rent_received  + apartment.get_apartment_rent_received_summed()
-            
         return self.__total_rent_received
