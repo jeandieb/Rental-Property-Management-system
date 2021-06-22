@@ -10,7 +10,7 @@ class ExpenseRecord:
     def add_expense(self):
         self.__expense_list.append(Expense())
         self.get_total_expenses() #update total
-        self.calc_expenses_by_categ() #update categories 
+        #self.calc_expenses_by_categ() #update categories 
 
     def remove_expense(self):
         self.print_expense_list()
@@ -25,8 +25,10 @@ class ExpenseRecord:
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__expense_list)))
 
         self.__total_expenses = self.__total_expenses - self.__expense_list[user_choice-1].get_amount()#udpate total
-        self.__expense_list.pop(user_choice-1)
-        self.calc_expenses_by_categ()#update categories 
+        #self.__expense_list.pop(user_choice-1)
+        self.get_total_expenses() #update total
+
+       # self.calc_expenses_by_categ()#update categories 
 
 
     def print_expense_list(self):
@@ -37,11 +39,10 @@ class ExpenseRecord:
 
     
     def calc_expenses_by_categ(self):
-        self.get_expenses_by_categ = [] #start over, does not update exisiting dict
+        self.get_expenses_by_categ = {} #start over, does not update exisiting dict
         for expense in self.__expense_list:
             categ = expense.get_category()
             if(categ in self.__expense_by_categ): 
-                print(self.__expense_by_categ[categ])
                 self.__expense_by_categ[categ] = self.__expense_by_categ[categ] + expense.get_amount()
             else:
                 self.__expense_by_categ.update({categ: expense.get_amount()})
@@ -51,6 +52,7 @@ class ExpenseRecord:
     def get_expense_list(self):
         return self.__expense_list
     
+    #ERROR: a second call to get_expenses_by_categ breaks the program "TypeError: 'dict' object is not callable..."
     def get_expenses_by_categ(self):
         self.calc_expenses_by_categ()
         return self.__expense_by_categ
