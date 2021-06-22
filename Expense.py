@@ -10,7 +10,7 @@ class Expense:
 
     def set_amount(self):
         try:
-            self.__amount = float(input('Enter the amount paid: $'))
+            self.__amount = abs(float(input('Enter the amount paid (positive numebr only): $')))
         except ValueError:
             print('amount can only be numbers (e.g: 12.56)... try again\n')
             self.set_amount()
