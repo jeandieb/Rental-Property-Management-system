@@ -93,6 +93,8 @@ class Apartment:
     def get_payments_received(self):
         return self.__apartment_rent_payments.get_payments_list()
 
+    def get_apartment_rent_received_summed(self):
+        return self.__apartment_rent_payments.get_apartment_rent_sum()
 
     def print_appartment(self):
         return('Apartment number: {} \nAddress: {} \nSize: {} \n# of beds: {}\n# of baths: {} \nRent: {}\nRented? {}'

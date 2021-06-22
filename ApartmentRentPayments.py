@@ -2,6 +2,8 @@ class ApartmentRentPayments:
     def __init__(self, apartment_number):
         self.__apartment_number = apartment_number
         self.__payments_list = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.__total_rent = 0
+
 
     def set_payment_amount(self):
         month = -1
@@ -35,6 +37,10 @@ class ApartmentRentPayments:
     def print_payments_list(self):
             print(str(self.__apartment_number) + ': ' + str(self.get_payments_list()))
 
+    def get_apartment_rent_sum(self):
+        self.__total_rent = self.calc_total_rent()
+        return self.__total_rent
         
-
-
+    def calc_total_rent(self):
+        for num in self.__payments_list:
+            self.__total_rent = self.__total_rent + num 

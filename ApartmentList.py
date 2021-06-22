@@ -70,7 +70,8 @@ class ApartmentList:
                     '6) Update rent amount\n' +
                     '7) Update rental status\n' +
                     '8) Update tenant\n' +
-                    '9) Update payments record\n')
+                    '9) Update payments record\n'+
+                    'Enter your choice: ')
             if(data.isdigit):
                 data = int(data)
                 if(data > 0 and data <= 9):
