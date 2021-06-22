@@ -52,7 +52,8 @@ class ExpenseRecord:
         return self.__expense_list
     
     def get_expenses_by_categ(self):
-        print(self.__expense_by_categ)
+        self.calc_expenses_by_categ()
+        return self.__expense_by_categ
 
     def get_total_expenses(self):
         self.__total_expenses = 0
