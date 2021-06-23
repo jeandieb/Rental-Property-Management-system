@@ -7,6 +7,35 @@ class ExpenseRecord:
         self.__total_expenses = 0
 
     
+    def menu(self):
+        user_input = -1
+        while(user_input != 0):
+            while(user_input == -1):
+                data = input('1) Add Expense\n'+
+                            '2) Remove Expense\n'+
+                            '3) Print Expense List\n'+
+                            '0) Go Back to Main Menu\n'+
+                            'Enter your choice: ')
+                if(data.isdigit):
+                    data = int(data)
+                    if (data >= 0 and data <= 3):
+                        user_input = data
+                if(user_input == -1):
+                    print('Enter a number between 0 and 3 ... please try again\n')
+
+            if(user_input == 1):
+                self.add_expense()
+
+            elif(user_input == 2):
+                self.remove_expense()
+
+            elif(user_input == 3):
+                self.print_expense_list()
+
+            elif(user_input == 0):
+                print('loading ...')
+                break     
+
     def add_expense(self):
         self.__expense_list.append(Expense())
         self.get_total_expenses() #update total

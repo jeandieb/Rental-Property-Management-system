@@ -6,6 +6,39 @@ class ApartmentList:
         self.__apartment_list = [] #list that will hold the apartments...
 
     
+    def menu(self):
+        user_input = -1
+        while(user_input != 0):
+            while(user_input == -1):
+                data = input('1) Add Apartment\n'+
+                            '2) Remove Apartment\n'+
+                            '3) Update Existing Apartment\n'+
+                            '4) Print Apartment List\n'+
+                            '0) Go Back to Main Menu\n'+
+                            'Enter your choice: ')
+                if(data.isdigit):
+                    data = int(data)
+                    if (data >= 0 and data <= 4):
+                        user_input = data
+                if(user_input == -1):
+                    print('Enter a number between 0 and 4 ... please try again\n')
+
+            if(user_input == 1):
+                self.add_apartment()
+
+            elif(user_input == 2):
+                self.remove_apartment()
+
+            elif(user_input == 3):
+                self.update_apartment()
+
+            elif(user_input == 4):
+                self.print_apartment_list()
+
+            elif(user_input == 0):
+                print('loading ...')
+                break 
+
     def add_apartment(self):
         self.__apartment_list.append(Apartment())
 

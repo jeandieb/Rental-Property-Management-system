@@ -4,7 +4,6 @@ class RentalIncomeRecord:
     def __init__(self):
         self.__apartment_list = ApartmentList()
         self.__total_rent_received = 0.0
-        self.menu()
 
 
     def menu(self):

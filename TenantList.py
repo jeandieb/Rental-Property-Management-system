@@ -6,15 +6,55 @@ class TenantList:
         self.__tenant_list = [] #list that will hold the tenants...
 
     
-    def add_apartment(self):
-        self.__apartment_list.append(Tenant())
+    def menu(self):
+        user_input = -1
+        while(user_input != 0):
+            user_input = self.get_choice()
+            if(user_input == 1):
+                self.add_tenant()
+
+            elif(user_input == 2):
+                self.remove_tenant()
+
+            elif(user_input == 3):
+                self.update_tenant()
+
+            elif(user_input == 4):
+                self.print_tenant_list()
+
+            elif(user_input == 0):
+                print('loading ...')
+                return 
+
+
+    def get_choice(self):
+        user_input = -1
+        while(user_input == -1):
+            data = input('1) Add Tenant\n'+
+                        '2) Remove Tenant\n'+
+                        '3) Update Existing Tenant\n'+
+                        '4) Print Tenant List\n'+
+                        '0) Go Back to Main Menu\n'+
+                        'Enter your choice: ')
+            if(data.isdigit()):
+                data = int(data)
+                if (data >= 0 and data <= 4):
+                    user_input = data
+            if(user_input == -1):
+                print('Enter a number between 0 and 4 ... please try again\n')
+
+        return user_input
+
+
+    def add_tenant(self):
+        self.__tenant_list.append(Tenant())
 
     def remove_tenant(self):
         user_choice = -1
         self.print_tenant_list()
         while(user_choice == -1):
             data = input("which tenant would you like to remove? ")
-            if(data.isdigit):
+            if(data.isdigit()):
                 data = int(data)
                 if(data > 0 and data <= len(self.__tenant_list)):
                     user_choice = data
@@ -29,7 +69,7 @@ class TenantList:
         self.print_tenant_list()
         while(user_choice == -1):
             data = input("which tenant would you like to edit? ")
-            if(data.isdigit):
+            if(data.isdigit()):
                 data = int(data)
                 if(data > 0 and data <= len(self.__apartment_list)):
                     user_choice = data
@@ -63,7 +103,7 @@ class TenantList:
                     '5) Update number of baths\n' +
                     '6) Update rent amount\n')
                     
-            if(data.isdigit):
+            if(data.isdigit()):
                 data = int(data)
                 if(data > 0 and data <= 6):
                     choice = data
@@ -74,9 +114,9 @@ class TenantList:
 
     def print_tenant_list(self):
         index = 0
-        for apartment in self.__apartment_list:
+        for tenant in self.__tenant_list:
             index = index + 1
-            print('{}) {}'.format(index, apartment.print_appartment()))
+            print('{}) {}'.format(index, tenant.print_tenant()))
 
     def get_tenant_list(self):
         return self.__tenant_list
