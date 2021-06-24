@@ -1,5 +1,5 @@
 from Expense import Expense
-from sqlite_methods import get_expenses_from_db
+from sqlite_methods import get_expenses_from_db, remove_expense, save_expense
 
 class ExpenseRecord:
     def __init__(self):
@@ -53,8 +53,11 @@ class ExpenseRecord:
         return user_input
 
     def add_expense(self):
-        self.__expense_list.append(Expense().user_init())
+        expense = Expense()
+        expense.user_init()
+        self.__expense_list.append(expense)
         self.get_total_expenses() #update total
+        save_expense(expense)
         #self.calc_expenses_by_categ() #update categories 
 
     def remove_expense(self):
@@ -70,10 +73,10 @@ class ExpenseRecord:
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__expense_list)))
 
         self.__total_expenses = self.__total_expenses - self.__expense_list[user_choice-1].get_amount()#udpate total
-        #self.__expense_list.pop(user_choice-1)
+        remove_expense(self.__expense_list[user_choice-1])
+        self.__expense_list.pop(user_choice-1)
         self.get_total_expenses() #update total
-
-       # self.calc_expenses_by_categ()#update categories 
+        # self.calc_expenses_by_categ()#update categories 
 
 
     def print_expense_list(self):

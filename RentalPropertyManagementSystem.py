@@ -9,7 +9,7 @@ class RentalPropertyManagementSystem:
         self.log_in_menu()
 
     def log_in_menu(self):
-        print('-------------------------\n' +
+        print('\n\n\n-------------------------\n' +
               'Rental Management System\n'+
               '-------------------------')
         user_choice = -1

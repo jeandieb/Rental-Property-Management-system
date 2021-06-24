@@ -10,7 +10,7 @@ class Expense:
     def db_init(self, amount, payee, payment_date, category):
         self.__amount = amount
         self.__payee = payee
-        self.__payment_date = datetime.strptime(payment_date, '%m/%d/%Y')
+        self.__payment_date = datetime.strptime(payment_date, '%Y-%m-%d')
         self.__category = category
 
     def user_init(self):
