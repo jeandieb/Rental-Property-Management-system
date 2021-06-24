@@ -71,7 +71,7 @@ class TenantList:
             data = input("which tenant would you like to edit? ")
             if(data.isdigit()):
                 data = int(data)
-                if(data > 0 and data <= len(self.__apartment_list)):
+                if(data > 0 and data <= len(self.__tenant_list)):
                     user_choice = data
             if (user_choice == -1):
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__tenant_list)))
@@ -113,6 +113,8 @@ class TenantList:
         return choice
 
     def print_tenant_list(self):
+        if(len(self.__tenant_list) == 0):
+            print('Tenant list is empty...\n')
         index = 0
         for tenant in self.__tenant_list:
             index = index + 1

@@ -10,18 +10,7 @@ class ExpenseRecord:
     def menu(self):
         user_input = -1
         while(user_input != 0):
-            while(user_input == -1):
-                data = input('1) Add Expense\n'+
-                            '2) Remove Expense\n'+
-                            '3) Print Expense List\n'+
-                            '0) Go Back to Main Menu\n'+
-                            'Enter your choice: ')
-                if(data.isdigit):
-                    data = int(data)
-                    if (data >= 0 and data <= 3):
-                        user_input = data
-                if(user_input == -1):
-                    print('Enter a number between 0 and 3 ... please try again\n')
+            user_input = self.get_choice()
 
             if(user_input == 1):
                 self.add_expense()
@@ -35,6 +24,24 @@ class ExpenseRecord:
             elif(user_input == 0):
                 print('loading ...')
                 break     
+
+
+    def get_choice(self):
+        user_input = -1
+        while(user_input == -1):
+                data = input('1) Add Expense\n'+
+                            '2) Remove Expense\n'+
+                            '3) Print Expense List\n'+
+                            '0) Go Back to Main Menu\n'+
+                            'Enter your choice: ')
+                if(data.isdigit()):
+                    data = int(data)
+                    if (data >= 0 and data <= 3):
+                        user_input = data
+                if(user_input == -1):
+                    print('Enter a number between 0 and 3 ... please try again\n')
+
+        return user_input
 
     def add_expense(self):
         self.__expense_list.append(Expense())
@@ -61,6 +68,8 @@ class ExpenseRecord:
 
 
     def print_expense_list(self):
+        if(len(self.__expense_list) == 0):
+            print('Expense list is empty...\n')
         i = 0
         for expense in self.__expense_list:
             i = i+1

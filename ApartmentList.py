@@ -115,6 +115,8 @@ class ApartmentList:
         return choice
 
     def print_apartment_list(self):
+        if(len(self.__apartment_list) == 0):
+            print('Apartment list is empty...\n')
         index = 0
         for apartment in self.__apartment_list:
             index = index + 1

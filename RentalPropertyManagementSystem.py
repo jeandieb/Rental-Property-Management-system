@@ -4,7 +4,7 @@ from Menu import Menu
 class RentalPropertyManagementSystem:
     def __init__(self):
         self.__user_name = 'user'
-        self.__password = 'CeCs343!'
+        self.__password = '0'
         self.__main_menu = Menu()
         self.log_in_menu()
 
