@@ -1,4 +1,5 @@
 from Expense import Expense
+from sqlite_methods import get_expenses_from_db
 
 class ExpenseRecord:
     def __init__(self):
@@ -6,6 +7,14 @@ class ExpenseRecord:
         self.__expense_by_categ = {}
         self.__total_expenses = 0
 
+    
+    
+    def load_expenses_from_db(self):
+        expenses_list = get_expenses_from_db()
+        for expense in expenses_list:
+            to_be_added = Expense()
+            to_be_added.db_init(expense[0], expense[1], expense[2], expense[3])
+            self.__expense_list.append(to_be_added)
     
     def menu(self):
         user_input = -1
@@ -44,7 +53,7 @@ class ExpenseRecord:
         return user_input
 
     def add_expense(self):
-        self.__expense_list.append(Expense())
+        self.__expense_list.append(Expense().user_init())
         self.get_total_expenses() #update total
         #self.calc_expenses_by_categ() #update categories 
 

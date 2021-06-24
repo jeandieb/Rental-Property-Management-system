@@ -1,5 +1,5 @@
 from Menu import Menu
-
+from sqlite_methods import close_db
 
 class RentalPropertyManagementSystem:
     def __init__(self):
@@ -33,6 +33,7 @@ class RentalPropertyManagementSystem:
                     self.__password = input('Enter your new password: ')
 
             elif(user_choice == 0):
+                close_db()
                 print('Good Bye!')
 
     def get_choice(self):

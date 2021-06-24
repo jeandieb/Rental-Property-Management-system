@@ -8,6 +8,7 @@ class Menu:
         self.__tenant_list = TenantList()
         self.__rental_rec = RentalIncomeRecord()
         self.__expense_rec = ExpenseRecord()
+        self.__expense_rec.load_expenses_from_db()
 
     def print_menu(self):
         user_choice = -1
