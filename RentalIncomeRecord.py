@@ -3,6 +3,7 @@ from ApartmentList import ApartmentList
 class RentalIncomeRecord:
     def __init__(self):
         self.__apartment_list = ApartmentList()
+        self.__apartment_list.load_apartments_from_db()
         self.__total_rent_received = 0.0
 
 

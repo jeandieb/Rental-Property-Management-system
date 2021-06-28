@@ -2,6 +2,20 @@ from ApartmentRentPayments import ApartmentRentPayments
 
 class Apartment:
     def __init__(self):
+        #left empty because initialization will be either from user or db and each has its own method... 
+       pass
+
+    def db_init(self, number, address, size, num_beds, num_baths, rent, rental_status):
+        self.__number = number
+        self.__address = address
+        self.__size = size
+        self.__num_beds = num_beds
+        self.__num_baths = num_baths
+        self.__rent = rent
+        self.__is_rented = rental_status    
+        self.__apartment_rent_payments = ApartmentRentPayments(self.get_number())
+
+    def user_init(self):
         self.set_number()
         self.set_address()
         self.set_size()
@@ -10,6 +24,7 @@ class Apartment:
         self.set_rent()
         self.set__rental_status()
         self.__apartment_rent_payments = ApartmentRentPayments(self.get_number())
+
 
 
     def set_number(self):

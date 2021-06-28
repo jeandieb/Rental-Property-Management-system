@@ -1,8 +1,15 @@
+from sqlite_methods import get_payments_record_from_db
+
+
 class ApartmentRentPayments:
     def __init__(self, apartment_number):
         self.__apartment_number = apartment_number
         self.__payments_list = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.__total_rent = 0.0
+        my_list = list(get_payments_record_from_db(apartment_number))
+        if(my_list): 
+            my_list.pop(0)
+            self.__payments_list = my_list
 
 
     def set_payment_amount(self):

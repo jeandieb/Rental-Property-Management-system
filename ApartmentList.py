@@ -1,10 +1,20 @@
 
 from Apartment import Apartment
+from sqlite_methods import get_apartments_form_db, save_apartment, remove_apartment
+
 
 class ApartmentList:
     def __init__(self):
         self.__apartment_list = [] #list that will hold the apartments...
 
+
+    def load_apartments_from_db(self):
+        apartment_list = get_apartments_form_db()
+        for apartment in apartment_list:
+            to_be_added = Apartment()
+            to_be_added.db_init(apartment[0], apartment[1], apartment[2], apartment[3], apartment[4], apartment[5], apartment[6])
+            self.__apartment_list.append(to_be_added)
+            to_be_added.print_appartment()
     
     def menu(self):
         user_input = -1
@@ -40,7 +50,10 @@ class ApartmentList:
                 break 
 
     def add_apartment(self):
-        self.__apartment_list.append(Apartment())
+        apartment = Apartment()
+        apartment.user_init()
+        self.__apartment_list.append(apartment)
+        save_apartment(apartment)
 
     def remove_apartment(self):
         user_choice = -1
@@ -53,7 +66,7 @@ class ApartmentList:
                     user_choice = data
             if (user_choice == -1):
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__apartment_list)))
-
+        remove_apartment(self.__apartment_list[user_choice-1])
         self.__apartment_list.pop(user_choice-1)
 
        
@@ -70,6 +83,7 @@ class ApartmentList:
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__apartment_list)))
         
         apartment = self.__apartment_list[user_choice-1]
+        remove_apartment(apartment)
         user_choice = self.get_what_to_update()
         if(user_choice == 1): 
             apartment.set_number()
@@ -89,6 +103,7 @@ class ApartmentList:
             apartment.set_tenant()
         elif(user_choice == 9):
             apartment.set_payment_received()
+        save_apartment(apartment)
         print('done')
             
 

@@ -6,6 +6,17 @@
 
 class Tenant:
     def __init__(self):
+        #left empty because initialization will be either from user or db and each has its own method... 
+        pass
+
+    def db_init(self, first_name, last_name, phone, email, ssn):
+        self.__first_name = first_name
+        self.__last_name = last_name
+        self.__phone = phone
+        self.__email = email
+        self.__SSN = ssn
+
+    def user_init(self):
         self.set_first_name()
         self.set_last_name()
         self.set_phone()

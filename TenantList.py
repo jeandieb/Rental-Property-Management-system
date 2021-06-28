@@ -1,11 +1,19 @@
 
 from Tenant import Tenant
+from sqlite_methods import get_tenants_from_db, save_tenant, remove_tenant
 
 class TenantList:
     def __init__(self):
         self.__tenant_list = [] #list that will hold the tenants...
 
-    
+
+    def load_tenants_from_db(self):
+        tenant_list = get_tenants_from_db()
+        for tenant in tenant_list:
+            to_be_added = Tenant()
+            to_be_added.db_init(tenant[0], tenant[1], tenant[2], tenant[3], tenant[4])
+            self.__tenant_list.append(to_be_added)
+
     def menu(self):
         user_input = -1
         while(user_input != 0):
@@ -46,8 +54,11 @@ class TenantList:
         return user_input
 
 
-    def add_tenant(self):
-        self.__tenant_list.append(Tenant())
+    def add_tenant(self): ##fix here 
+        tenant = Tenant()
+        tenant.user_init()
+        self.__tenant_list.append(tenant)
+        save_tenant(tenant)
 
     def remove_tenant(self):
         user_choice = -1
@@ -60,7 +71,7 @@ class TenantList:
                     user_choice = data
             if (user_choice == -1):
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__tenant_list)))
-
+        remove_tenant(self.__tenant_list[user_choice-1])
         self.__tenant_list.pop(user_choice-1)
 
        
@@ -77,6 +88,7 @@ class TenantList:
                 print('Enter a number between 1 and {}... please try again\n'.format(len(self.__tenant_list)))
         
         tenant = self.__tenant_list[user_choice-1]
+        remove_tenant(tenant)#remove the tenant and then re add it after getting updated 
         user_choice = self.get_what_to_update()
         if(user_choice == 1): 
             tenant.set_first_name()
@@ -90,6 +102,7 @@ class TenantList:
             tenant.set_SSN()
         elif(user_choice == 6):
             None#tenant.set_apartment() needs to take apartment from the user.. 
+        save_tenant(tenant)
         print('done')
             
 
@@ -99,9 +112,9 @@ class TenantList:
             data = input('1) Update first name\n' + 
                     '2) Update last name\n'+
                     '3) Update phone\n' +
-                    '4) Update number of beds\n' +
-                    '5) Update number of baths\n' +
-                    '6) Update rent amount\n')
+                    '4) Update email\n' +
+                    '5) Update SSN\n') # +
+                    #'6) Update rent amount\n')
                     
             if(data.isdigit()):
                 data = int(data)

@@ -6,6 +6,7 @@ from ExpenseRecord import ExpenseRecord
 class Menu:
     def __init__(self):
         self.__tenant_list = TenantList()
+        self.__tenant_list.load_tenants_from_db()
         self.__rental_rec = RentalIncomeRecord()
         self.__expense_rec = ExpenseRecord()
         self.__expense_rec.load_expenses_from_db()
