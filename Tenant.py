@@ -1,8 +1,4 @@
-#TODO: update __init__ to use setters to initilize objects,
-#  update setters to validate users' input
 
-#fix set_apartment so it take an apartment number from the user and  check if it's in the apartmentlist... 
-#use set_apartment in __intit__ because a tenant can't exist without having a valid apartment. 
 
 class Tenant:
     def __init__(self):
