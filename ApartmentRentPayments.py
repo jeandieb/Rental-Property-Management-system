@@ -1,10 +1,11 @@
-from sqlite_methods import get_payments_record_from_db
-
+from sqlite_methods import get_payments_record_from_db, save_payments_record
 
 class ApartmentRentPayments:
     def __init__(self, apartment_number):
         self.__apartment_number = apartment_number
         self.__payments_list = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.__payments_list.insert(0, apartment_number)        
+        save_payments_record(self.__payments_list)
         self.__total_rent = 0.0
         my_list = list(get_payments_record_from_db(apartment_number))
         if(my_list): 

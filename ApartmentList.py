@@ -1,6 +1,7 @@
 
+from Tenant import Tenant
 from Apartment import Apartment
-from sqlite_methods import get_apartments_form_db, save_apartment, remove_apartment
+from sqlite_methods import get_apartments_form_db, save_apartment, remove_apartment, get_tenants_from_db
 
 
 class ApartmentList:
@@ -12,7 +13,7 @@ class ApartmentList:
         apartment_list = get_apartments_form_db()
         for apartment in apartment_list:
             to_be_added = Apartment()
-            to_be_added.db_init(apartment[0], apartment[1], apartment[2], apartment[3], apartment[4], apartment[5], apartment[6])
+            to_be_added.db_init(apartment[0], apartment[1], apartment[2], apartment[3], apartment[4], apartment[5], apartment[6], apartment[7])
             self.__apartment_list.append(to_be_added)
             to_be_added.print_appartment()
     
@@ -100,7 +101,33 @@ class ApartmentList:
         elif(user_choice == 7):
             apartment.set__rental_status()
         elif(user_choice == 8):
-            apartment.set_tenant()
+
+            tenant_list = get_tenants_from_db()
+            tenant_list_objects = []
+            for tenant in tenant_list:
+                to_be_added = Tenant()
+                to_be_added.db_init(tenant[0], tenant[1], tenant[2], tenant[3], tenant[4])
+                tenant_list_objects.append(to_be_added)
+
+            i = 0
+            for tenant in tenant_list_objects:
+                i = i+1
+                full_name = tenant.get_first_name() + ' ' + tenant.get_last_name()
+                print('{}) {}'.format(i, full_name))
+            
+            user_choice = -1
+            while(user_choice == -1):
+                data = input("which tenant would you like to add to this apartment? ")
+                if(data.isdigit()):
+                    data = int(data)
+                    if(data > 0 and data <= len(tenant_list_objects)):
+                        user_choice = data
+                if (user_choice == -1):
+                    print('Enter a number between 1 and {}... please try again\n'.format(len(tenant_list_objects)))
+            
+            full_name = tenant_list_objects[user_choice -1].get_first_name() + ' ' + tenant_list_objects[user_choice -1].get_last_name()
+            apartment.set_tenant(full_name)
+       
         elif(user_choice == 9):
             apartment.set_payment_received()
         save_apartment(apartment)

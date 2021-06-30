@@ -5,7 +5,7 @@ class Apartment:
         #left empty because initialization will be either from user or db and each has its own method... 
        pass
 
-    def db_init(self, number, address, size, num_beds, num_baths, rent, rental_status):
+    def db_init(self, number, address, size, num_beds, num_baths, rent, rental_status, tenant):
         self.__number = number
         self.__address = address
         self.__size = size
@@ -14,6 +14,7 @@ class Apartment:
         self.__rent = rent
         self.__is_rented = rental_status    
         self.__apartment_rent_payments = ApartmentRentPayments(self.get_number())
+        self.__tenant_name = tenant
 
     def user_init(self):
         self.set_number()
@@ -23,6 +24,7 @@ class Apartment:
         self.set_num_baths()
         self.set_rent()
         self.set__rental_status()
+        self.__tenant_name = 'None'
         self.__apartment_rent_payments = ApartmentRentPayments(self.get_number())
 
 
@@ -92,15 +94,15 @@ class Apartment:
     def get_rental_status(self):
         return self.__is_rented
 
-    def set_tenant(self, tenant):
-        self.__tenant = tenant
-        if(tenant == None):
+    def set_tenant(self, tenant_name):
+        self.__tenant_name = tenant_name
+        if(tenant_name == None):
             self.__is_rented = False
         else:
             self.__is_rented = True
 
     def get_tenant(self):
-        return self.__tenant
+        return self.__tenant_name
 
     def set_payment_received(self):
         self.__apartment_rent_payments.set_payment_amount()
@@ -112,5 +114,8 @@ class Apartment:
         return self.__apartment_rent_payments.get_apartment_rent_sum()
 
     def print_appartment(self):
-        return('Apartment number: {} \nAddress: {} \nSize: {} \n# of beds: {}\n# of baths: {} \nRent: {}\nRented? {}'
-        .format(self.get_number(), self.get_address(), self.get_size(), self.get_num_beds(), self.get_num_baths(), self.get_rent(), self.get_rental_status()))
+        tenant_name = ' '
+        if (self.__tenant_name == None):
+            tenant_name = 'empty'
+        else: return('Apartment number: {} \nAddress: {} \nSize: {} \n# of beds: {}\n# of baths: {} \nRent: {}\nRented? {}\nTenant: {}'
+        .format(self.get_number(), self.get_address(), self.get_size(), self.get_num_beds(), self.get_num_baths(), self.get_rent(), self.get_rental_status(), self.__tenant_name))

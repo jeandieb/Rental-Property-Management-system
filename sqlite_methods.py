@@ -36,7 +36,8 @@ if(os.stat("rental_management.db").st_size == 0):
             num_beds INTEGER,
             num_baths REAL,
             rent REAL,
-            rental_status TEXT
+            rental_status TEXT,
+            tenant_name TEXT
     ) """)
 
     #create apartments rent payments table
@@ -66,9 +67,9 @@ if(os.stat("rental_management.db").st_size == 0):
                                             ('Al-Muntaser', 'Al-Matani', '818-765-0957', 'almuntasera@abc.com', 'XXX-XX-XXXX'),
                                             ('Phuong', 'Nguyen', '000-000-0000', 'phuongn@abc.com', 'XXX-XX-XXXX')""")
 
-    c.execute("""INSERT INTO apartments VALUES ('141', 'Warren Street, Colton, CA', 1000, 2, 2, 2300, 'False'),
-                                              ('551', 'Halifax Drive, Carson, CA', 850, 2, 1, 1900, 'False'),
-                                              ('9280', 'Ivy Road Wilmington, CA', 1200, 3, 2.5, 3000, 'False')""")
+    c.execute("""INSERT INTO apartments VALUES ('141', 'Warren Street, Colton, CA', 1000, 2, 2, 2300, 'False', 'None'),
+                                              ('551', 'Halifax Drive, Carson, CA', 850, 2, 1, 1900, 'False', 'None'),
+                                              ('9280', 'Ivy Road Wilmington, CA', 1200, 3, 2.5, 3000, 'True', 'Jean Dieb')""")
 
 
     c.execute("""INSERT INTO apartments_rent_payments VALUES ('141' ,1000, 1500, 1500, 1000, 800, 1200, 1000, 1500, 1500, 1000, 800, 1200 ),
@@ -119,9 +120,9 @@ def get_apartments_form_db():
 
 def save_apartment(apartment):
     with conn:
-        c.execute("INSERT INTO apartments VALUES (:number, :address, :size, :num_beds, :num_baths, :rent, :rental_status)",
+        c.execute("INSERT INTO apartments VALUES (:number, :address, :size, :num_beds, :num_baths, :rent, :rental_status, :tenant_name)",
         {'number': apartment.get_number(), 'address': apartment.get_address(), 'size': apartment.get_size(),
-        'num_beds': apartment.get_num_beds(), 'num_baths': apartment.get_num_baths(), 'rent':apartment.get_rent(), 'rental_status':apartment.get_rental_status()})
+        'num_beds': apartment.get_num_beds(), 'num_baths': apartment.get_num_baths(), 'rent':apartment.get_rent(), 'rental_status':apartment.get_rental_status(), 'tenant_name':apartment.get_tenant()})
 
 def remove_apartment(apartment):
     with conn:
@@ -132,7 +133,12 @@ def get_payments_record_from_db(apartment_num):
     c.execute("SELECT * FROM apartments_rent_payments WHERE apartment_num = :apartment_num", {'apartment_num': apartment_num})
     return (c.fetchone())
     
-
+def save_payments_record(payement_rec):
+    payement_rec = list(payement_rec)
+    with conn:
+        c.execute("INSERT INTO apartments_rent_payments VALUES (:apartment_num, :Jan, :Feb, :Mar, :Apr, :May, :Jun, :Jul, :Aug, :Sep, :Oct, :Nov, :Dec)",
+        {'apartment_num': payement_rec[0], 'Jan':payement_rec[1], 'Feb':payement_rec[2], 'Mar': payement_rec[3], 'Apr': payement_rec[4], 'May':payement_rec[5], 'Jun': payement_rec[6],
+        'Jul':payement_rec[7], 'Aug':payement_rec[8], 'Sep':payement_rec[9], 'Oct':payement_rec[10], 'Nov':payement_rec[11], 'Dec':payement_rec[12]})
 
 
 def close_db():
