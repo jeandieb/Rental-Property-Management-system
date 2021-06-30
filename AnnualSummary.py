@@ -15,4 +15,5 @@ class AnnualSummary:
         print('Annual Summary:\n------------------')
         print('Income:\nRent: {}'.format(total_rent))
         print('Expenses:\n{}'.format(self.__expense_record.get_expenses_by_categ()))
+        print('Total Expenses:\n{}'.format(self.__expense_record.get_total_expenses()))
         print('Balance: {}'.format(self.net_profit))

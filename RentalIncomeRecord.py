@@ -49,6 +49,7 @@ class RentalIncomeRecord:
         return choice
     
     def generate_income_record(self):
+        print('Month  Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sep     Oct     Nov     Dec')
         for apartment in self.__apartment_list.get_apartment_list():
             print(str(apartment.get_number()) + ': ' + str(apartment.get_payments_received()))
 
